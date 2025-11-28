@@ -28,38 +28,76 @@ function createSlug(text) {
   text = text.replaceAll('.' , '');
   text = text.replaceAll(',' , '');
   text = text.replaceAll('?' , '');
-  return text
+  return text;
 }
 // TODO: invoke createSlug with test string and update DOM
 slugged.textContent = createSlug(nonSlugged.textContent);
 
 /* --- Simple Calculator --- */
 // TODO: add helper function (takes two numbers, returns sum)
+function myAdd(num1, num2) {
+  let sum = num1 + num2;
+  return sum;
+}
 // TODO: subtract helper function
+function mySubtract(num1, num2) {
+  let difference = num1 - num2;
+  return difference;
+}
 // TODO: multiply helper function
+function myMultiply(num1, num2) {
+  let product = num1 * num2;
+  return product;
+}
 // TODO: divide helper function (remember: check for zero!)
-
+function myDivide(num1, num2) {
+  let quotient;
+  if (num2 != 0) {
+    quotient = num1 / num2;
+  }
+  return quotient;
+}
 // TODO: calculate function - accepts num1, num2, operator; calls appropriate helper
 function calculate(num1, num2, operator) {
-  // Use conditionals to determine which operation to perform
+  let result;
+  if (operator === "+") {
+    result = myAdd(num1, num2);
+  }
+  else if (operator === "-") {
+    result = mySubtract(num1, num2);
+  }
+  else if (operator === "*") {
+    result = myMultiply(num1, num2);
+  }
+  else if (operator === "/") {
+    result = myDivide(num1, num2);
+  }
+  return result;
 }
 
 function handleCalculatorSubmit(event) {
   event.preventDefault();
 
-  const aValue = document.getElementById("a").value;
-  const bValue = document.getElementById("b").value;
+  let aValue = document.getElementById("a").value;
+  let bValue = document.getElementById("b").value;
   const operatorElement = document.querySelector(
     'input[name="operator"]:checked'
   );
 
   // TODO: Coerce string values to numbers
+  aValue = Number(aValue);
+  bValue = Number(bValue);
   // TODO: Error handle if no operator is selected (guard clause)
   // TODO: Call calculate function with operands and operator
+  let finalTally = calculate(aValue, bValue, operatorElement.value);
   // TODO: Update DOM with result
+  const resultField = document.getElementById('calculator-result');
+  resultField.innerHTML = finalTally;
+  console.log(operatorElement.value);
 }
 
 // TODO: Add event listener to form element
+document.addEventListener("submit", handleCalculatorSubmit);
 
 /* --- Carousel Interface --- */
 const carouselMessages = [
