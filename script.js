@@ -14,9 +14,24 @@ const slugifySimple = "Hello World ";
 const slugifyHard = "Hello World! This is my blog post.";
 
 // TODO: create DOM selector variables for output elements
+const nonSlugged = document.getElementById("non-slugified-string");
+const slugged = document.getElementById("slugified-string");
+
+nonSlugged.textContent = slugifyHard;
 
 // TODO: declare the createSlug function (takes text parameter, returns string)
+function createSlug(text) {
+  text = text.toLowerCase();
+  text = text.trim();
+  text = text.replaceAll(' ', '-');
+  text = text.replaceAll('!' , '');
+  text = text.replaceAll('.' , '');
+  text = text.replaceAll(',' , '');
+  text = text.replaceAll('?' , '');
+  return text
+}
 // TODO: invoke createSlug with test string and update DOM
+slugged.textContent = createSlug(nonSlugged.textContent);
 
 /* --- Simple Calculator --- */
 // TODO: add helper function (takes two numbers, returns sum)
